@@ -5,18 +5,28 @@ Created on Sat Jan 25 12:10:52 2025
 @author: Proshin Pavel
 """
 import math
+
+# проверяем введенные значения и преобразуем в float
+def input_to_float():
+    while True:  
+        try:
+            x = float(input())
+            return x
+        except ValueError:  # Обрабатываем только ошибку преобразования
+            print("Введенное значение не число, попробуйте снова.")
+
 # вводим исходные данные
 def input_par():
     print("Введите кратчайшее расстояние между спасателем и кромкой воды, d1 (ярды)")
-    d1 = float(input())
+    d1 = input_to_float()
     print("Введите кратчайшее расстояние от утопающего до берега, d2 (футы)")
-    d2 = float(input())    
+    d2 = input_to_float()   
     print("Введите боковое смещение между спасателем и утопающим, h (ярды)")
-    h = float(input())   
+    h = input_to_float()  
     print("Введите скорость движения спасателя по песку, v_sand (мили в час)")
-    v = float(input())   
+    v = input_to_float()   
     print("Введите коэффициент замедления спасателя при движении в воде, n")
-    n = float(input())   
+    n = input_to_float()   
     return d1, d2, h, v, n 
 
 # переводим все значения к футам
@@ -41,7 +51,7 @@ def calculation(d1, q, h, d2, v, n):
 def find_angle(d1, h, d2, v, n):
     time = float('inf')
     best_Q = 0
-    for q in range(0, 91):  # Проверяем углы от 0 до 90 градусов
+    for q in range(0, 91): 
         Q = math.tan(q * math.pi / 180)
         t = calculation(d1, Q, h, d2, v, n)
         if t < time:
@@ -50,9 +60,9 @@ def find_angle(d1, h, d2, v, n):
     return best_Q, time 
 
 def main():
-    d1, d2, h, v, n = input_par()  # Получаем значения
-    d1, h, v = to_foot(d1, h, v)  # Преобразуем значения
-    best_Q, time = find_angle(d1, h, d2, v, n)  # Находим оптимальный угол
+    d1, d2, h, v, n = input_par()  # получаем исходные данные
+    d1, h, v = to_foot(d1, h, v)  # преобразуем значения в float, и переводим все к футам
+    best_Q, time = find_angle(d1, h, d2, v, n)  # находим оптимальный угол
     print(f"Оптимальный угол Q: {best_Q} градусов, время: {time} секунд")
 
 # Вызов функции main для запуска программы
