@@ -12,7 +12,7 @@ def input_to_float():
         try:
             x = float(input())
             return x
-        except ValueError:  # Обрабатываем только ошибку преобразования
+        except ValueError: 
             print("Введенное значение не число, попробуйте снова.")
 
 # вводим исходные данные
@@ -65,5 +65,5 @@ def main():
     best_Q, time = find_angle(d1, h, d2, v, n)  # находим оптимальный угол
     print(f"Оптимальный угол Q: {best_Q} градусов, время: {time} секунд")
 
-# Вызов функции main для запуска программы
+
 main()
